@@ -28,15 +28,15 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private EmailValidator emailValidator;
 	
-	@SuppressWarnings("unused")
 	@Autowired
 	private BCryptPasswordEncoder cryptPasswordEncoder;
-	
+
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
 	
+	@Override
 	public String createUser(RegistrationRequest request) {
 		boolean isEmailValid = emailValidator.isEmailValid(request.getEmail());
 		if(!isEmailValid) {
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 		if(userByEmail.isPresent()) {
 			return message.EMAIL_ALREADY_EXISTS_MESSAGE;
 		}
-		
+				
 		User user = new User();
 		BeanUtils.copyProperties(request, user);
 		user.setPassword(cryptPasswordEncoder.encode(request.getPassword()));
@@ -61,4 +61,5 @@ public class UserServiceImpl implements UserService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(message.USER_NOT_FOUND_MESSAGE));
 	}
+
 }
