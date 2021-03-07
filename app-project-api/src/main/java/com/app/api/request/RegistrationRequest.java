@@ -2,6 +2,7 @@ package com.app.api.request;
 
 import org.springframework.stereotype.Component;
 
+import com.app.api.entity.enumeration.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -21,4 +22,5 @@ public class RegistrationRequest {
 	private String dateOfBirth;
 	private String email;
 	private String password;
+	private UserRole userRole;
 }
