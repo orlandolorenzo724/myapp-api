@@ -18,13 +18,7 @@ public class DateValidator {
 	}
 	
 	private boolean isYearValid(String date) {
-		StringBuilder builder = new StringBuilder();
-		
-		for(int i = 0; i < 4; i++) {
-			builder.append(date.charAt(i));
-		}
-		
-		int insertedYear = Integer.parseInt(builder.toString());
+		int insertedYear = Integer.parseInt(date.substring(0, 4));
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		
 		if(insertedYear > currentYear) {

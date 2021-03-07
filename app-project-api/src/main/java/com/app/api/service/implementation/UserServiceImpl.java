@@ -20,10 +20,10 @@ import com.app.api.service.UserService;
 import com.app.api.service.util.UserServiceUtil;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
-	
+		
 	@Autowired
 	private UserServiceUtil userUtil;
 	

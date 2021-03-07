@@ -1,6 +1,7 @@
 package com.app.api.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -96,5 +97,13 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public void addCategory(UserCategory category) {
+		if(categories == null) {
+			categories = new ArrayList<>();
+		}
+		
+		categories.add(category);
 	}
 }

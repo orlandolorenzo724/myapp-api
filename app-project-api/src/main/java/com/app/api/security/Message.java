@@ -15,6 +15,7 @@ public class Message {
 	public final String FIRST_NAME_NOT_VALID_MESSAGE = "First name is not valid!";
 	public final String LAST_NAME_NOT_VALID_MESSAGE = "Last name is not valid!";
 	public final String PASSWORD_NOT_VALID_MESSAGE = "Password not valid";
-	
 	public final String SUCCESS = "SUCCESS";
+	public final String CATEGORY_NOT_FOUND_MESSAGE = "Category not found";
+	public final String CATEGORY_ADDED_WITH_SUCCESS_MESSAGE = "Category addedd";
 }

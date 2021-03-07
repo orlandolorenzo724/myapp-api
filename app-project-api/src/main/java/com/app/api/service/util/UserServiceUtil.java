@@ -89,6 +89,6 @@ public class UserServiceUtil {
 			return message.PASSWORD_NOT_VALID_MESSAGE;
 		}
 		
-		return message.SUCCESS;
+		return message.SUCCESS;	
 	}
 }

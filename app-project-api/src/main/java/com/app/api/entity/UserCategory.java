@@ -1,5 +1,6 @@
 package com.app.api.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserCategory {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
 	private Long id;
 	private String name;
@@ -37,5 +38,13 @@ public class UserCategory {
 	public UserCategory(String name, String description) {
 		this.name = name;
 		this.description = description;
+	}
+	
+	public void addUser(User user) {
+		if(users == null) {
+			users = new ArrayList<>();
+		}
+		
+		users.add(user);
 	}
 }
