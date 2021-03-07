@@ -12,4 +12,6 @@ import com.app.api.request.RegistrationRequest;
 public interface UserService extends UserDetailsService{
 	public List<User> getUsers();
 	public String createUser(RegistrationRequest request);
+	public String deleteUser(Long id);
+	public String updateUser(Long id, String firstName, String lastName, String dateOfBirth, String password);
 }
