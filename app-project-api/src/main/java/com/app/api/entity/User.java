@@ -3,7 +3,9 @@ package com.app.api.entity;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +13,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +38,7 @@ import lombok.Setter;
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "user_id")
 	private Long id;
 	private String firstName;
 	private String lastName;
@@ -44,6 +51,13 @@ public class User implements UserDetails {
 	private UserRole userRole;
 	private Boolean locked = false;
 	private Boolean enabled = true;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "app_user_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private List<UserCategory> categories;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Task> tasks;
 	
 	public User(String firstName, String lastName, LocalDate dateOfBirth, String email, String password, UserRole userRole) {
 		this.firstName = firstName;

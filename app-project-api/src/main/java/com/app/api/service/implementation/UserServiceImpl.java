@@ -2,7 +2,6 @@ package com.app.api.service.implementation;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService{
 		user.setLastName(lastName);
 		LocalDate actualDateOfBirth = LocalDate.parse(dateOfBirth);
 		user.setDateOfBirth(actualDateOfBirth);
-		user.setPassword(password);
+		user.setPassword(cryptPasswordEncoder.encode(password));
 		
 		return message.USER_UPDATED_WITH_SUCCESS_MESSAGE;
 	}
