@@ -10,7 +10,7 @@ import com.app.api.dao.UserRepository;
 import com.app.api.dto.UserCategoryDto;
 import com.app.api.entity.User;
 import com.app.api.entity.UserCategory;
-import com.app.api.request.AddCategoryRequest;
+import com.app.api.request.CategoryRequest;
 import com.app.api.security.Message;
 import com.app.api.service.UserCategoryService;
 import com.app.api.service.util.UserCategoryServiceUtil;
@@ -29,29 +29,46 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 	@Autowired
 	private Message message;
 	
-	@SuppressWarnings("unused")
 	@Override
-	public String addCategory(Long id, AddCategoryRequest request) {
+	public String addCategory(Long id, CategoryRequest request) {
 		User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException(message.ID_DOESNT_EXIST_MESSAGE));
 		
-		// TODO: Check if user is already registered to a user category
-		
-		if(request == null) {
-			// TODO: Handle entries
+		// Checks if user is already registered to a user category
+		boolean isCategoryPresent = user.isCategoryByNamePresent(request.getName());
+		if(isCategoryPresent) {
+			return message.CATEGORY_IS_ALREADY_ADDED;
 		}
-		
+				
 		String correctCategoryName = userCategoryUtil.convertCategoryNameToStandard(request.getName());
 		
-		UserCategory categoryByName = userCategoryRepository.findByName(correctCategoryName).orElseThrow(() -> new IllegalStateException(message.CATEGORY_NOT_FOUND_MESSAGE + request.getName()));		
-		categoryByName.setName(correctCategoryName);
+		UserCategory category = userCategoryRepository.findByName(correctCategoryName).orElseThrow(() -> new IllegalStateException(message.CATEGORY_NOT_FOUND_MESSAGE + request.getName()));		
+		category.setName(correctCategoryName);
 		
-		userRepository.addUserCategory(id, categoryByName.getId());
+		userRepository.addUserCategory(id, category.getId());
 		
 		return message.CATEGORY_ADDED_WITH_SUCCESS_MESSAGE;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public List<UserCategoryDto> getUserCategories(Long id) {
+		User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException(message.ID_DOESNT_EXIST_MESSAGE));
 		return userRepository.getUserCategories(id);
+	}
+	
+	/**
+	 * TODO
+	 */
+	@Override
+	public String updateCategory(Long id, String oldCategoryName, String newCategoryName) {
+		return null;
+	}
+	
+	/**
+	 * TODO
+	 */
+	@Override
+	public String deleteCategory(Long id, CategoryRequest request) {
+		return null;
 	}
 }

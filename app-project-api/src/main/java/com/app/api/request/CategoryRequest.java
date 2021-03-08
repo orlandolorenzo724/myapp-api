@@ -12,6 +12,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddCategoryRequest {
+public class CategoryRequest {
 	private String name;
 }

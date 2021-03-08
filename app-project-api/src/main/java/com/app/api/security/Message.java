@@ -18,4 +18,7 @@ public class Message {
 	public final String SUCCESS = "SUCCESS";
 	public final String CATEGORY_NOT_FOUND_MESSAGE = "Category not found";
 	public final String CATEGORY_ADDED_WITH_SUCCESS_MESSAGE = "Category addedd";
+	public final String CATEGORY_IS_ALREADY_ADDED = "Category is already present";
+	public final String CATEGORY_IS_NOT_PRESENT = "Category is not present";
+	public final String CATEGORY_UPDATED_WITH_SUCCESS_MESSAGE = "Category updated with success";
 }

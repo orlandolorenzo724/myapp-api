@@ -17,14 +17,13 @@ import com.app.api.entity.User;
 import com.app.api.request.RegistrationRequest;
 import com.app.api.service.UserService;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("")
+	@GetMapping
 	public List<User> getUsers() {
 		return userService.getUsers();
 	}

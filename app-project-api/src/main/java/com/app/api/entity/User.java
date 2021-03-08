@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +27,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.app.api.entity.enumeration.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,6 +58,7 @@ public class User implements UserDetails {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "app_user_category", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	@JsonIgnore
 	private List<UserCategory> categories;
 	
 	@OneToMany(mappedBy = "user")
@@ -110,5 +114,20 @@ public class User implements UserDetails {
 		}
 		
 		categories.add(category);
+	}
+	
+	public void deleteCategory(UserCategory oldCategory) {
+		categories.remove(oldCategory);
+	}
+	
+	public boolean isCategoryByNamePresent(String name) {
+		Iterator<UserCategory> iterator = categories.iterator();
+		while(iterator.hasNext()) {
+			if(iterator.next().getName().equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

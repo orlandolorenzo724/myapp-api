@@ -10,4 +10,8 @@ public class UserCategoryServiceUtil {
 		category.substring(2, category.length());
 		return category;
 	}
+	
+	public boolean isCategoryAlreadyRegisteredToCertainUser(String category) {
+		return true;
+	}
 }

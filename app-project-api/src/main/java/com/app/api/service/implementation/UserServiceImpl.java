@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private BCryptPasswordEncoder cryptPasswordEncoder;
-	
+
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
