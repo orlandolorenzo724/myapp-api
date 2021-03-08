@@ -23,10 +23,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	@Transactional
 	public void addUserCategory(@Param("userId") Long userId, @Param("categoryId") Long categoryId);
 	
-	/**
-	 * FIX THIS
-	 * 
-	 */
 	@Query(value = "SELECT au.email AS email, uc.name AS name FROM app_user_category AS auc"
 			+ " JOIN app_user AS au ON au.user_id = auc.user_id"
 			+ " JOIN user_category AS uc ON uc.category_id = auc.category_id"
