@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.app.api.dto.UserCategoryDto;
 import com.app.api.entity.User;
+import com.app.api.response.UserCategoryResponse;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
@@ -27,5 +27,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
 			+ " JOIN app_user AS au ON au.user_id = auc.user_id"
 			+ " JOIN user_category AS uc ON uc.category_id = auc.category_id"
 			+ " WHERE au.user_id = :id", nativeQuery = true)
-	public List<UserCategoryDto> getUserCategories(@Param("id") Long id);
+	public List<UserCategoryResponse> getUserCategories(@Param("id") Long id);
 }

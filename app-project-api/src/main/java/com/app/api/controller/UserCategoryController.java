@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.api.dto.UserCategoryDto;
 import com.app.api.request.CategoryRequest;
+import com.app.api.response.UserCategoryResponse;
 import com.app.api.service.UserCategoryService;
 
 @RestController
@@ -24,7 +24,7 @@ public class UserCategoryController {
 	private UserCategoryService userService;
 	
 	@GetMapping
-	public List<UserCategoryDto> getUserCategories(@PathVariable("id") Long id){
+	public List<UserCategoryResponse> getUserCategories(@PathVariable("id") Long id){
 		return userService.getUserCategories(id);
 	}
 	

@@ -21,4 +21,5 @@ public class Message {
 	public final String CATEGORY_IS_ALREADY_ADDED = "Category is already present";
 	public final String CATEGORY_IS_NOT_PRESENT = "Category is not present";
 	public final String CATEGORY_UPDATED_WITH_SUCCESS_MESSAGE = "Category updated with success";
+	public final String TASK_ADDED_WITH_SUCCESS = "Task addedd with success!";
 }

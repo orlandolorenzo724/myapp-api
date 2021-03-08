@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.app.api.dao.UserCategoryRepository;
 import com.app.api.dao.UserRepository;
-import com.app.api.dto.UserCategoryDto;
 import com.app.api.entity.User;
 import com.app.api.entity.UserCategory;
 import com.app.api.request.CategoryRequest;
+import com.app.api.response.UserCategoryResponse;
 import com.app.api.security.Message;
 import com.app.api.service.UserCategoryService;
 import com.app.api.service.util.UserCategoryServiceUtil;
 
 @Service
-public class UserCategoryServiceImpl implements UserCategoryService {
+public class UserCategoryServiceImplementation implements UserCategoryService {
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -51,7 +51,7 @@ public class UserCategoryServiceImpl implements UserCategoryService {
 
 	@SuppressWarnings("unused")
 	@Override
-	public List<UserCategoryDto> getUserCategories(Long id) {
+	public List<UserCategoryResponse> getUserCategories(Long id) {
 		User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException(message.ID_DOESNT_EXIST_MESSAGE));
 		return userRepository.getUserCategories(id);
 	}
