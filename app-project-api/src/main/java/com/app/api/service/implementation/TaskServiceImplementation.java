@@ -16,7 +16,6 @@ import com.app.api.security.Message;
 import com.app.api.security.validator.DateValidator;
 import com.app.api.service.TaskService;
 
-@SuppressWarnings("unused")
 @Service
 public class TaskServiceImplementation implements TaskService {
 	@Autowired
@@ -47,7 +46,6 @@ public class TaskServiceImplementation implements TaskService {
 		
 		LocalDate startingDate = LocalDate.parse(request.getStartingDate());
 		LocalDate endingDate = LocalDate.parse(request.getEndingDate());
-		
 		Task task = new Task(request.getName(), request.getDescription(), startingDate, endingDate);
 		task.setUser(user);
 		
@@ -59,5 +57,22 @@ public class TaskServiceImplementation implements TaskService {
 	@Override
 	public List<UserTaskResponse> getTasks() {
 		return taskRepository.getUserTasks();
+	}
+
+	@Override
+	public String deleteTask(Long userId, Long taskId) {
+		boolean checkUserId = userRepository.existsById(userId);
+		if(!checkUserId) {
+			return message.ID_DOESNT_EXIST_MESSAGE;
+		}
+		
+		boolean checkTaskId = taskRepository.existsById(taskId);
+		if(!checkTaskId) {
+			return message.ID_DOESNT_EXIST_MESSAGE;
+		}
+		
+		taskRepository.deleteById(taskId);
+		
+		return message.TASK_DELETED_WITH_SUCCESS;
 	}
 }

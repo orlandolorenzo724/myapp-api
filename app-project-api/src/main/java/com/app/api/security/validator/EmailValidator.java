@@ -1,19 +1,14 @@
 package com.app.api.security.validator;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class EmailValidator {
-	private final String EMAIL_REGEX = "^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$";
+	private final Pattern EMAIL_REGEX = Pattern.compile("^[\\w-\\+]+(\\.[\\w]+)*@[\\w-]+(\\.[\\w]+)*(\\.[a-z]{2,})$");
 	
 	public boolean isEmailValid(String email) {
-		Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(email);
-		
-		boolean isValid = matcher.matches();
-		return isValid;
+		return EMAIL_REGEX.matcher(email).matches();
 	}
 }

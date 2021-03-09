@@ -70,6 +70,7 @@ public class UserServiceImplementation implements UserService {
 		}
 		
 		userRepository.deleteById(id);
+		
 		return message.ID_DELETED_WITH_SUCCESS_MESSAGE;
 	}
 	
@@ -85,8 +86,7 @@ public class UserServiceImplementation implements UserService {
 		
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		LocalDate actualDateOfBirth = LocalDate.parse(dateOfBirth);
-		user.setDateOfBirth(actualDateOfBirth);
+		user.setDateOfBirth(LocalDate.parse(dateOfBirth));
 		user.setPassword(cryptPasswordEncoder.encode(password));
 		
 		return message.USER_UPDATED_WITH_SUCCESS_MESSAGE;

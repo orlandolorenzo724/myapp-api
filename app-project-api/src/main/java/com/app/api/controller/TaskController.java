@@ -3,6 +3,7 @@ package com.app.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,14 +20,19 @@ import com.app.api.service.TaskService;
 public class TaskController {
 	@Autowired
 	private TaskService taskService;
-	
+
 	@GetMapping
 	public List<UserTaskResponse> getTasks() {
 		return taskService.getTasks();
 	}
 	
 	@PostMapping("/add")
-	public String addTask(@PathVariable("id") Long id, @RequestBody TaskRequest request) {
-		return taskService.addTask(id, request);
+	public String addTask(@PathVariable("id") Long userId, @RequestBody TaskRequest request) {
+		return taskService.addTask(userId, request);
+	}
+	
+	@DeleteMapping("/delete/{taskId}")
+	public String deleteTask(@PathVariable("id") Long userId, @PathVariable("taskId") Long taskId) {
+		return taskService.deleteTask(userId, taskId);
 	}
 }
