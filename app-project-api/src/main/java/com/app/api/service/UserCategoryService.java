@@ -11,6 +11,5 @@ import com.app.api.response.UserCategoryResponse;
 public interface UserCategoryService {
 	public String addCategory(Long id, CategoryRequest request);
 	public List<UserCategoryResponse> getUserCategories(Long id);
-	public String deleteCategory(Long id, CategoryRequest request);
-	public String updateCategory(Long id, String oldCategoryName, String newCategoryName);
+	public String deleteCategory(Long id, Long categoryId);
 }

@@ -28,6 +28,13 @@ public class UserCategoryServiceImplementation implements UserCategoryService {
 	
 	@Autowired
 	private Message message;
+
+	@SuppressWarnings("unused")
+	@Override
+	public List<UserCategoryResponse> getUserCategories(Long id) {
+		User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException(message.ID_DOESNT_EXIST_MESSAGE));
+		return userRepository.getUserCategories(id);
+	}
 	
 	@Override
 	public String addCategory(Long id, CategoryRequest request) {
@@ -49,26 +56,20 @@ public class UserCategoryServiceImplementation implements UserCategoryService {
 		return message.CATEGORY_ADDED_WITH_SUCCESS_MESSAGE;
 	}
 
-	@SuppressWarnings("unused")
 	@Override
-	public List<UserCategoryResponse> getUserCategories(Long id) {
-		User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException(message.ID_DOESNT_EXIST_MESSAGE));
-		return userRepository.getUserCategories(id);
-	}
-	
-	/**
-	 * TODO
-	 */
-	@Override
-	public String updateCategory(Long id, String oldCategoryName, String newCategoryName) {
-		return null;
-	}
-	
-	/**
-	 * TODO
-	 */
-	@Override
-	public String deleteCategory(Long id, CategoryRequest request) {
-		return null;
+	public String deleteCategory(Long userId, Long categoryId) {
+		boolean checkUserId = userRepository.existsById(userId);
+		if(!checkUserId) {
+			return message.ID_DOESNT_EXIST_MESSAGE + " (userId)";
+		}
+		
+		boolean checkCategoryId = userCategoryRepository.existsById(categoryId);
+		if(!checkCategoryId) {
+			return message.ID_DOESNT_EXIST_MESSAGE + " (categoryId)";
+		}
+		
+		userCategoryRepository.deleteById(categoryId);
+		
+		return message.CATEGORY_DELETED_WITH_SUCCESS;
 	}
 }

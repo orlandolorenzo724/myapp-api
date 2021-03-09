@@ -12,4 +12,5 @@ public interface TaskService {
 	public String addTask(Long id, TaskRequest request);
 	public List<UserTaskResponse> getTasks();
 	public String deleteTask(Long userId, Long taskId);
+	public String updateTask(Long userId, Long taskId, String name, String description, String startingDate, String endingDate);
 }

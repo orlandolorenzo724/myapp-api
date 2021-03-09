@@ -68,7 +68,7 @@ public class UserServiceUtil {
 		return message.SUCCESS;
 	}
 	
-	public String updateUserDataValidation(Long id, String firstName, String lastName, String dateOfBirth, String password) {		
+	public String updateUserDataValidation(String firstName, String lastName, String dateOfBirth, String password) {		
 		boolean isFirstNameValid = nameValidator.isNameValid(firstName);
 		if(!isFirstNameValid) {
 			return message.FIRST_NAME_NOT_VALID_MESSAGE;

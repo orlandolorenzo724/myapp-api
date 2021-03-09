@@ -79,7 +79,7 @@ public class UserServiceImplementation implements UserService {
 	public String updateUser(Long id, String firstName, String lastName, String dateOfBirth, String password) {
 		User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException(message.ID_DOESNT_EXIST_MESSAGE));
 
-		String result = userUtil.updateUserDataValidation(id, firstName, lastName, dateOfBirth, password);
+		String result = userUtil.updateUserDataValidation(firstName, lastName, dateOfBirth, password);
 		if(!result.equalsIgnoreCase(message.SUCCESS)) {
 			return result;
 		}

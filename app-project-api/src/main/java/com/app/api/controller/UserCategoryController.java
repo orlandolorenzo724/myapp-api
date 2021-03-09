@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.api.request.CategoryRequest;
@@ -33,14 +31,9 @@ public class UserCategoryController {
 		return userService.addCategory(id, request);
 	}
 	
-	@PutMapping("/update")
-	public String updateUserCategory(@PathVariable("id") Long id, @RequestParam(required = true) String oldCategoryName, @RequestParam(required = true) String newCategoryName) {
-		return userService.updateCategory(id, oldCategoryName, newCategoryName);
-	}
-	
 	// TODO
-	@DeleteMapping
-	public String deleteUserCategory(@PathVariable("id") Long id, @RequestBody CategoryRequest request) {
-		return userService.deleteCategory(id, request);
+	@DeleteMapping("/delete/{categoryId}")
+	public String deleteUserCategory(@PathVariable("id") Long userId, @PathVariable("categoryId") Long categoryId) {
+		return userService.deleteCategory(userId, categoryId);
 	}
 }

@@ -12,7 +12,7 @@ import com.app.api.response.UserTaskResponse;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long>{
 	
-	@Query(value = "SELECT au.email AS userEmail, t.name AS taskName, t.description AS taskDescription,"
+	@Query(value = "SELECT t.task_id AS taskId, au.email AS userEmail, t.name AS taskName, t.description AS taskDescription,"
 			+ " t.starting_date AS startingDate, t.ending_date AS endingDate"
 			+ " FROM task AS t"
 			+ " JOIN app_user AS au"
