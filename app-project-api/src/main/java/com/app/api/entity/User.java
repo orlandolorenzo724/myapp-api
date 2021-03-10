@@ -62,9 +62,11 @@ public class User implements UserDetails {
 	private List<UserCategory> categories;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Task> tasks;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<TaskCategory> tasksCategory;
 	
 	public User(String firstName, String lastName, LocalDate dateOfBirth, String email, String password, UserRole userRole) {

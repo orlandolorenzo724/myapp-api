@@ -32,4 +32,10 @@ public class TaskCategoryServiceImplementation implements TaskCategoryService{
 	public String addTaskCategory(Long userId, CategoryRequest request) {
 		return null;
 	}
+
+	@Override
+	public String updateTaskCategory(Long userId, String name, String description, String startingDate, String endingDate) {
+		
+		return null;
+	}
 }

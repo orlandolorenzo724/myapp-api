@@ -8,4 +8,5 @@ import com.app.api.response.TaskCategoryResponse;
 public interface TaskCategoryService {
 	public String addTaskCategory(Long userId, CategoryRequest request);
 	public List<TaskCategoryResponse> getTasks(Long userId);
+	public String updateTaskCategory(Long userId, String name, String description, String startingDate, String endingDate);
 }	
