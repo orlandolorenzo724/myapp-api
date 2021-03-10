@@ -61,8 +61,11 @@ public class User implements UserDetails {
 	@JsonIgnore
 	private List<UserCategory> categories;
 	
-	@OneToMany(mappedBy = "user", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user")
 	private List<Task> tasks;
+	
+	@OneToMany(mappedBy = "user")
+	private List<TaskCategory> tasksCategory;
 	
 	public User(String firstName, String lastName, LocalDate dateOfBirth, String email, String password, UserRole userRole) {
 		this.firstName = firstName;

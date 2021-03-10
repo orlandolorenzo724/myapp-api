@@ -25,4 +25,5 @@ public class Message {
 	public final String TASK_DELETED_WITH_SUCCESS = "Task deleted with success!";
 	public final String CATEGORY_DELETED_WITH_SUCCESS = "Category deleted with success!";
 	public final String TASK_UPDATED_WITH_SUCCESS = "Task updated with success";
+	public final String TASK_CATEGORY_ADDED_WITH_SUCCESS = "Task category added with success!";
 }

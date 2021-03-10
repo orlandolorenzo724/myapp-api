@@ -31,7 +31,6 @@ public class UserCategoryController {
 		return userService.addCategory(id, request);
 	}
 	
-	// TODO
 	@DeleteMapping("/delete/{categoryId}")
 	public String deleteUserCategory(@PathVariable("id") Long userId, @PathVariable("categoryId") Long categoryId) {
 		return userService.deleteCategory(userId, categoryId);

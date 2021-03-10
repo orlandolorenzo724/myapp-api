@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.api.dao.UserRepository;
 import com.app.api.entity.User;
+import com.app.api.request.CategoryRequest;
 import com.app.api.request.RegistrationRequest;
 import com.app.api.security.Message;
 import com.app.api.service.UserService;
@@ -31,8 +32,8 @@ public class UserServiceImplementation implements UserService {
 	private Message message;
 	
 	@Autowired
-	private BCryptPasswordEncoder cryptPasswordEncoder;
-
+	private BCryptPasswordEncoder cryptPasswordEncoder; 
+	
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
@@ -56,10 +57,18 @@ public class UserServiceImplementation implements UserService {
 	
 		return message.USER_CREATED_WITH_SUCCESS_MESSAGE;
 	}
-
+	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(message.USER_NOT_FOUND_MESSAGE));
+	public String addTaskCategory(Long id, CategoryRequest request) {
+		if(!userRepository.existsById(id)) {
+			return message.ID_DOESNT_EXIST_MESSAGE;
+		}
+		
+		String correctCategoryName = userUtil.convertCategoryNameToStandard(request.getName());
+		
+		userRepository.addTask(id, correctCategoryName);
+		
+		return message.TASK_CATEGORY_ADDED_WITH_SUCCESS;
 	}
 
 	@Override
@@ -90,5 +99,10 @@ public class UserServiceImplementation implements UserService {
 		user.setPassword(cryptPasswordEncoder.encode(password));
 		
 		return message.USER_UPDATED_WITH_SUCCESS_MESSAGE;
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(message.USER_NOT_FOUND_MESSAGE));
 	}
 }

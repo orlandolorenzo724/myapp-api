@@ -91,4 +91,10 @@ public class UserServiceUtil {
 		
 		return message.SUCCESS;	
 	}
+	
+	public String convertCategoryNameToStandard(String category) {
+		category.substring(0, 1).toUpperCase();
+		category.substring(2, category.length());
+		return category;
+	}
 }

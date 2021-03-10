@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.api.entity.User;
+import com.app.api.request.CategoryRequest;
 import com.app.api.request.RegistrationRequest;
 import com.app.api.service.UserService;
 
@@ -41,5 +42,10 @@ public class UserController {
 	@DeleteMapping("/delete/{userId}")
 	public String deleteUser(@PathVariable("userId") Long id) {
 		return userService.deleteUser(id);
+	}
+	
+	@PostMapping("/{userId}/add_task")
+	public String addTaskCategory(@PathVariable("userId") Long id, @RequestBody CategoryRequest request) {
+		return userService.addTaskCategory(id, request);
 	}
 }
